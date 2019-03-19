@@ -24,6 +24,9 @@ ExecStart=/usr/local/bin/node_exporter \
     --no-collector.{{ collector }} \
 {% endfor %}
     --web.listen-address={{ node_exporter_web_listen_address }}
+{%   if node_exporter_textfile_directory %}
+    --collector.textfile.directory={{ node_exporter_textfile_directory }}
+{%   endif -%}
 
 SyslogIdentifier=node_exporter
 Restart=always
