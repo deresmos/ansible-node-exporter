@@ -33,6 +33,13 @@ All variables which can be overridden are stored in [defaults/main.yml](defaults
 
 ## Example
 
+### Run
+
+Check run.
+```bash
+$ ansible-playbook --ask-become-pass sample.yml -C
+```
+
 ### Playbook
 
 Use it in a playbook as follows:
