@@ -1,6 +1,6 @@
 <p><img src="https://www.circonus.com/wp-content/uploads/2015/03/sol-icon-itOps.png" alt="graph logo" title="graph" align="right" height="60" /></p>
 
-# Ansible Role: node exporter
+# Ansible Role: process exporter
 
 [![Build Status](https://travis-ci.org/cloudalchemy/ansible-node-exporter.svg?branch=master)](https://travis-ci.org/cloudalchemy/ansible-node-exporter)
 [![License](https://img.shields.io/badge/license-MIT%20License-brightgreen.svg)](https://opensource.org/licenses/MIT)
@@ -23,13 +23,11 @@ All variables which can be overridden are stored in [defaults/main.yml](defaults
 
 | Name           | Default Value | Description                        |
 | -------------- | ------------- | -----------------------------------|
-| `node_exporter_version` | 0.17.0 | Node exporter package version |
-| `node_exporter_web_listen_address` | "0.0.0.0:9100" | Address on which node exporter will listen |
-| `node_exporter_system_group` | "node-exp" | System group used to run node_exporter |
-| `node_exporter_system_user` | "node-exp" | System user used to run node_exporter |
-| `node_exporter_enabled_collectors` | [ systemd, textfile ] | List of additionally enabled collectors. It adds collectors to [those enabled by default](https://github.com/prometheus/node_exporter#enabled-by-default) |
-| `node_exporter_disabled_collectors` | [] | List of disabled collectors. By default node_exporter disables collectors listed [here](https://github.com/prometheus/node_exporter#disabled-by-default). |
-| `node_exporter_textfile_dir` | "/var/lib/node_exporter" | Directory used by the [Textfile Collector](https://github.com/prometheus/node_exporter#textfile-collector). To get permissions to write metrics in this directory, users must be in `node-exp` system group.
+| `process_exporter_version` | 0.5.0 | Process exporter package version |
+| `process_exporter_web_listen_address` | "0.0.0.0:9256" | Address on which process exporter will listen |
+| `process_exporter_system_group` | "process_exporter" | System group used to run process_exporter |
+| `process_exporter_system_user` | "process_exporter" | System user used to run process_exporter |
+| `process_exporter_config_directory` | "/etc/process_exporter" | Config directory path of process exporter |
 
 ## Example
 
