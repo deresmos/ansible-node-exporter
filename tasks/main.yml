@@ -2,11 +2,13 @@
 - name: Gather variables for each operating system
   include_vars: "{{ item }}"
   with_first_found:
-    - files: 
-      - "{{ ansible_distribution_file_variety | lower }}.yml"
-      - "{{ ansible_distribution | lower }}.yml"
-      - "{{ ansible_os_family | lower }}.yml"
-      skip: true
+    - "{{ ansible_distribution | lower }}-{{ ansible_distribution_version | lower }}.yml"
+    - "{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
+    - "{{ ansible_distribution_file_variety | lower }}.yml"
+    - "{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
+    - "{{ ansible_distribution | lower }}.yml"
+    - "{{ ansible_os_family | lower }}-{{ ansible_distribution_version.split('.')[0] }}.yml"
+    - "{{ ansible_os_family | lower }}.yml"
   tags:
     - node_exporter_install
     - node_exporter_configure
@@ -20,6 +22,7 @@
 
 - import_tasks: install.yml
   become: true
+  when: (not __node_exporter_is_installed.stat.exists) or (__node_exporter_current_version_output.stderr_lines[0].split(" ")[2] != node_exporter_version)
   tags:
     - node_exporter_install
 

@@ -8,7 +8,7 @@
     mode: 0644
   notify: restart node_exporter
 
-- name: Create texfile collector dir
+- name: Create textfile collector dir
   file:
     path: "{{ node_exporter_textfile_dir }}"
     state: directory
@@ -20,7 +20,7 @@
 
 - name: Allow Node Exporter port in SELinux on RedHat OS family
   seport:
-    ports: "{{ node_exporter_web_listen_address.split(':')[1] }}"
+    ports: "{{ node_exporter_web_listen_address.split(':')[-1] }}"
     proto: tcp
     setype: http_port_t
     state: present
