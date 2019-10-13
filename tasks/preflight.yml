@@ -13,6 +13,6 @@
   shell: systemctl --version | awk '$1 == "systemd" {print $2}'
   changed_when: false
   check_mode: false
-  register: node_exporter_systemd_version
+  register: process_exporter_systemd_version
   tags:
     - skip_ansible_lint

@@ -8,6 +8,14 @@
     mode: 0644
   notify: restart process_exporter
 
+- name: Create the process_exporter folder
+  file:
+    path: "{{ process_exporter_config_directory }}"
+    state: directory
+    owner: root
+    group: "{{ process_exporter_system_group }}"
+    mode: 0755
+
 - name: Copy the process_exporter config
   template:
     src: process_exporter.yml.j2
@@ -16,9 +24,9 @@
     group: "{{ process_exporter_system_group }}"
     mode: 0644
 
-- name: Allow Node Exporter port in SELinux on RedHat OS family
+- name: Allow Process Exporter port in SELinux on RedHat OS family
   seport:
-    ports: "{{ node_exporter_web_listen_address.split(':')[1] }}"
+    ports: "{{ process_exporter_web_listen_address.split(':')[1] }}"
     proto: tcp
     setype: http_port_t
     state: present

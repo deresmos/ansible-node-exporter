@@ -8,32 +8,32 @@
       - "{{ ansible_os_family | lower }}.yml"
       skip: true
   tags:
-    - node_exporter_install
-    - node_exporter_configure
-    - node_exporter_run
+    - process_exporter_install
+    - process_exporter_configure
+    - process_exporter_run
 
 - import_tasks: preflight.yml
   tags:
-    - node_exporter_install
-    - node_exporter_configure
-    - node_exporter_run
+    - process_exporter_install
+    - process_exporter_configure
+    - process_exporter_run
 
 - import_tasks: install.yml
   become: true
   tags:
-    - node_exporter_install
+    - process_exporter_install
 
 - import_tasks: configure.yml
   become: true
   tags:
-    - node_exporter_configure
+    - process_exporter_configure
 
-- name: Ensure Node Exporter is enabled on boot
+- name: Ensure Process Exporter is enabled on boot
   become: true
   systemd:
     daemon_reload: true
-    name: node_exporter
+    name: process_exporter
     enabled: true
     state: started
   tags:
-    - node_exporter_run
+    - process_exporter_run
